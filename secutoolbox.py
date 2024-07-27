@@ -213,6 +213,7 @@ def main():
         print("21. Run snmpwalk")
         print("22. Run snmpwalk extend")
         print("23. Run xfreerdp")
+        print("99. Addhosts")
         print("0. Exit")
 
         choice = input(f"{BOLD}{GREEN}\nEnter your choice: {RESET}")
@@ -312,7 +313,7 @@ def main():
         elif choice == '99':
             ip = input("Enter the IP: ")
             host = input("Enter host: ")
-            run_xfreerdp(ip, host)
+            run_addhosts(ip, host)
         elif choice == '0':
             break
         else:
