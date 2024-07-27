@@ -7,9 +7,9 @@ RED = '\033[91m'
 LPURPLE = '\033[94m'
 GREEN = '\033[92m'
 
-def run_ffuf_subdomain(url, wordlist):
+def run_ffuf_subdomain(url, wordlist, word):
     try:
-        command = f"ffuf -u 'http://{url}' -H 'Host: FUZZ.{url}' -w {wordlist} -c -t 100 -fw 1546"
+        command = f"ffuf -u 'http://{url}' -H 'Host: FUZZ.{url}' -w {wordlist} -c -t 100 -fw {word}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running ffuf: {e}{RESET}")
@@ -23,14 +23,14 @@ def run_ffuf(url, wordlist):
 
 def run_nmap_full(target):
     try:
-        command = f"sudo nmap -sC -sV -O --open -p- -oA full {target} -Pn"
+        command = f"sudo nmap -sC -sV -O --open -p- {target} -Pn"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running nmap: {e}{RESET}")
 
 def run_nmap_udp(target):
     try:
-        command = f"sudo nmap -Pn -sU -sV -sC --top-ports=20 -oN top_20_udp_nmap.txt {target}"
+        command = f"sudo nmap -Pn -sU -sV -sC --top-ports=20 {target}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running nmap: {e}{RESET}")
@@ -213,7 +213,8 @@ def main():
         if choice == '1':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
-            run_ffuf_subdomain(url, wordlist)
+            word = input("Enter word size to filter: ")
+            run_ffuf_subdomain(url, wordlist, word)
         elif choice == '2':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
