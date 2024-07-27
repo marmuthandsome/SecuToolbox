@@ -7,6 +7,13 @@ RED = '\033[91m'
 LPURPLE = '\033[94m'
 GREEN = '\033[92m'
 
+def run_addhosts(host, ip):
+    try:
+        command = f"""sudo -- sh -c -e "echo '{ip} {host}' >> /etc/hosts;"""
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running addhost: {e}{RESET}")
+
 def run_ffuf_subdomain(url, wordlist, word):
     try:
         command = f"ffuf -u 'http://{url}' -H 'Host: FUZZ.{url}' -w {wordlist} -c -t 100 -fw {word}"
@@ -302,6 +309,10 @@ def main():
             username = input("Enter username: ")
             password = input("Enter password: ")
             run_xfreerdp(url, username, password)
+        elif choice == '99':
+            ip = input("Enter the IP: ")
+            host = input("Enter host: ")
+            run_xfreerdp(ip, host)
         elif choice == '0':
             break
         else:
