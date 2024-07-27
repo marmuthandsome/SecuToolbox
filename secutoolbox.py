@@ -56,9 +56,9 @@ def run_gobuster_dir(url, wordlist):
     except Exception as e:
         print(f"{RED}Error running gobuster: {e}{RESET}")
 
-def run_gobuster_dns(url, wordlist):
+def run_gobuster_dns(url, wordlist, need):
     try:
-        command = f"gobuster dns -d {url} -t 50 -w {wordlist}"
+        command = f"gobuster dns -d {url} -t 50 -w {wordlist} {need}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running gobuster: {e}{RESET}")
@@ -239,7 +239,8 @@ def main():
         elif choice == '8':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
-            run_gobuster_dns(url, wordlist)
+            need = input("Need --wildcard: ")
+            run_gobuster_dns(url, wordlist, need)
         elif choice == '9':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
