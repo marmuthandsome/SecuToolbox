@@ -9,7 +9,7 @@ GREEN = '\033[92m'
 
 def run_addhosts(host, ip):
     try:
-        command = f"""sudo -- sh -c -e "echo '{ip} {host}' >> /etc/hosts;"""
+        command = f"sudo -- sh -c -e \"echo '{ip} {host}' >> /etc/hosts\";"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running addhost: {e}{RESET}")
@@ -313,7 +313,7 @@ def main():
         elif choice == '99':
             ip = input("Enter the IP: ")
             host = input("Enter host: ")
-            run_addhosts(ip, host)
+            run_addhosts(host, ip)
         elif choice == '0':
             break
         else:
