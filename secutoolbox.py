@@ -49,9 +49,9 @@ def run_whatweb(url):
     except Exception as e:
         print(f"{RED}Error running whatweb: {e}{RESET}")
 
-def run_wfuzz(url, wordlist):
+def run_wfuzz(url, wordlist, word):
     try:
-        command = f"wfuzz -c -z file,{wordlist} --hc 404 {url}/FUZZ"
+        command = f"wfuzz -c -t 100 -w {wordlist} -u http://{url} -H 'Host: FUZZ.{url}' --hw {word}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running wfuzz: {e}{RESET}")
@@ -70,9 +70,9 @@ def run_gobuster_dns(url, wordlist, need):
     except Exception as e:
         print(f"{RED}Error running gobuster: {e}{RESET}")
 
-def run_gobuster_vhost(url, wordlist, status):
+def run_gobuster_vhost(url, wordlist):
     try:
-        command = f"gobuster vhost -u {url} -t 50 -w {wordlist} --append-domain -b {status}"
+        command = f"gobuster vhost -u {url} -t 50 -w {wordlist} --append-domain"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running gobuster: {e}{RESET}")
@@ -194,7 +194,7 @@ def main():
         print("3. Run nmap (full)")
         print("4. Run nmap (udp)")
         print("5. Run whatweb")
-        print("6. Run wfuzz")
+        print("6. Run wfuzz (subdomain)")
         print("7. Run gobuster (directory)")
         print("8. Run gobuster (dns)")
         print("9. Run gobuster (vhost)")
@@ -239,7 +239,8 @@ def main():
         elif choice == '6':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
-            run_wfuzz(url, wordlist)
+            word = input("Enter size word to filter: ")
+            run_wfuzz(url, wordlist, word)
         elif choice == '7':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
@@ -252,8 +253,7 @@ def main():
         elif choice == '9':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
-            status = input("Enter filter status: ")
-            run_gobuster_vhost(url, wordlist, status)
+            run_gobuster_vhost(url, wordlist)
         elif choice == '10':
             url = input("Enter the URL: ")
             wordlist = input("Enter the path to the wordlist: ")
