@@ -105,5 +105,3 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 ## Contact
 
 For any inquiries or issues, please open an issue on GitHub.
-
-```
