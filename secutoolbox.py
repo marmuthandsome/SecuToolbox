@@ -182,6 +182,13 @@ def run_dnsenum(url, domain):
     except Exception as e:
         print(f"{RED}Error running xfreerdp: {e}{RESET}")
 
+def run_kerbrute(url, domain, user):
+    try:
+        command = f"./kerbrute userenum --dc {url} -d {domain} {user}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running xfreerdp: {e}{RESET}")
+
 def main():
     print(f"{LCYAN}{BOLD}"
         f"                                                                                \n"
@@ -221,6 +228,7 @@ def main():
         print("22. Run snmpwalk extend")
         print("23. Run xfreerdp")
         print("24. Run dnsenum")
+        print("25. Run kerbrute (userenum)")
         print("99. Addhosts")
         print("0. Exit")
 
@@ -323,6 +331,11 @@ def main():
             url = input("Enter the URL: ")
             domain = input("Enter domain: ")
             run_xfreerdp(url, domain)
+        elif choice == '25':
+            url = input("Enter the IP: ")
+            domain = input("Enter domain: ")
+            user = input("Enter username/username.txt: ")
+            run_addhosts(url, domain, user)
         elif choice == '99':
             ip = input("Enter the IP: ")
             host = input("Enter host: ")
