@@ -91,9 +91,9 @@ def run_smbclient(url):
     except Exception as e:
         print(f"{RED}Error running smbclient: {e}{RESET}")
 
-def run_smbclient_user(url, user, password, share):
+def run_smbclient_user(url, user, password):
     try:
-        command = f"smbclient -U {user}%{password} -L //{url}/{share}"
+        command = f"smbclient -U {user}%{password} -L //{url}/"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running smbclient: {e}{RESET}")
@@ -297,8 +297,7 @@ def main():
             url = input("Enter the URL: ")
             user = input("Enter User: ")
             password = input("Enter Password: ")
-            share = input("Enter SMB Share: ")
-            run_smbclient_user(url, user, password, share)
+            run_smbclient_user(url, user, password)
         elif choice == '13':
             url = input("Enter the URL: ")
             run_smbmap(url)
