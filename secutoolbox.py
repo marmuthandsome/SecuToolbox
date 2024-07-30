@@ -91,6 +91,13 @@ def run_smbclient(url):
     except Exception as e:
         print(f"{RED}Error running smbclient: {e}{RESET}")
 
+def run_smbclient_user(url, user, password, share):
+    try:
+        command = f"smbclient -U {user}%{password} -L //{url}/{share}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running smbclient: {e}{RESET}")
+
 def run_smbmap(url):
     try:
         command = f"smbmap -u '' -p '' -H {url}"
@@ -180,14 +187,14 @@ def run_dnsenum(url, domain):
         command = f"dnsenum --dnsserver {url} -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt {domain} dnsenum VERSION:1.2.6"
         subprocess.run(command, shell=True)
     except Exception as e:
-        print(f"{RED}Error running xfreerdp: {e}{RESET}")
+        print(f"{RED}Error running dnsenum: {e}{RESET}")
 
 def run_kerbrute(url, domain, user):
     try:
         command = f"./kerbrute userenum --dc {url} -d {domain} {user}"
         subprocess.run(command, shell=True)
     except Exception as e:
-        print(f"{RED}Error running xfreerdp: {e}{RESET}")
+        print(f"{RED}Error running kerbrute: {e}{RESET}")
 
 def main():
     print(f"{LCYAN}{BOLD}"
@@ -214,7 +221,8 @@ def main():
         print("9. Run gobuster (vhost)")
         print("10. Run dirsearch")
         print(f"{LPURPLE}\nActive Directory{RESET}")
-        print("11. Run smbclient")
+        print("11. Run smbclient (guest)")
+        print("12. Run smbclient (user & password)")
         print("12. Run smbmap")
         print("13. Run evilwinrm (password)")
         print("14. Run evilwinrm (hash)")
@@ -279,6 +287,12 @@ def main():
             run_smbclient(url)
         elif choice == '12':
             url = input("Enter the URL: ")
+            user = input("Enter User: ")
+            password = input("Enter Password: ")
+            share = input("Enter SMB Share: ")
+            run_smbclient_user(url, user, password, share)
+        elif choice == '12':
+            url = input("Enter the URL: ")
             run_smbmap(url)
         elif choice == '13':
             url = input("Enter the URL: ")
@@ -330,12 +344,12 @@ def main():
         elif choice == '24':
             url = input("Enter the URL: ")
             domain = input("Enter domain: ")
-            run_xfreerdp(url, domain)
+            run_dnsenum(url, domain)
         elif choice == '25':
             url = input("Enter the IP: ")
             domain = input("Enter domain: ")
             user = input("Enter username/username.txt: ")
-            run_addhosts(url, domain, user)
+            run_kerbrute(url, domain, user)
         elif choice == '99':
             ip = input("Enter the IP: ")
             host = input("Enter host: ")
