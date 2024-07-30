@@ -114,14 +114,14 @@ def run_evilwinrm_hash(url, username, hash):
 
 def run_crackmapexec_smb_password(url, username, password):
     try:
-        command = f"sudo crackmapexec smb {url} -u {username} -p '{password}' -x whoami --local-auth"
+        command = f"sudo crackmapexec smb {url} -u {username} -p '{password}' --continue-on-success"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running crackmapexec: {e}{RESET}")
 
 def run_crackmapexec_smb_hash(url, username, hash):
     try:
-        command = f"sudo crackmapexec smb {url} -u {username} -H {hash} -x whoami --local-auth"
+        command = f"sudo crackmapexec smb {url} -u {username} -H {hash} --continue-on-success"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running crackmapexec: {e}{RESET}")
@@ -175,6 +175,13 @@ def run_xfreerdp(url, username, password):
     except Exception as e:
         print(f"{RED}Error running xfreerdp: {e}{RESET}")
 
+def run_dnsenum(url, domain):
+    try:
+        command = f"dnsenum --dnsserver {url} -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt {domain} dnsenum VERSION:1.2.6"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running xfreerdp: {e}{RESET}")
+
 def main():
     print(f"{LCYAN}{BOLD}"
         f"                                                                                \n"
@@ -213,6 +220,7 @@ def main():
         print("21. Run snmpwalk")
         print("22. Run snmpwalk extend")
         print("23. Run xfreerdp")
+        print("24. Run dnsenum")
         print("99. Addhosts")
         print("0. Exit")
 
@@ -311,6 +319,10 @@ def main():
             username = input("Enter username: ")
             password = input("Enter password: ")
             run_xfreerdp(url, username, password)
+        elif choice == '24':
+            url = input("Enter the URL: ")
+            domain = input("Enter domain: ")
+            run_xfreerdp(url, domain)
         elif choice == '99':
             ip = input("Enter the IP: ")
             host = input("Enter host: ")
