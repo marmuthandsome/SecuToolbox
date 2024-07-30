@@ -105,6 +105,13 @@ def run_smbmap(url):
     except Exception as e:
         print(f"{RED}Error running smbmap: {e}{RESET}")
 
+def run_smbmap_user(url, user, password):
+    try:
+        command = f"smbmap -u {user} -p {password} -H {url}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running smbmap: {e}{RESET}")
+
 def run_evilwinrm_password(url, username, password):
     try:
         command = f"evil-winrm -i {url} -u {username} -p '{password}'"
@@ -223,20 +230,21 @@ def main():
         print(f"{LPURPLE}\nActive Directory{RESET}")
         print("11. Run smbclient (guest)")
         print("12. Run smbclient (user & password)")
-        print("12. Run smbmap")
-        print("13. Run evilwinrm (password)")
-        print("14. Run evilwinrm (hash)")
-        print("15. Run crackmapexec smb (password)")
-        print("16. Run crackmapexec smb (hash)")
-        print("17. Run crackmapexec evilwinrm (password)")
-        print("18. Run crackmapexec evilwinrm (hash)")
-        print("19. Run rpcclient")
-        print("20. Run enum4linux")
-        print("21. Run snmpwalk")
-        print("22. Run snmpwalk extend")
-        print("23. Run xfreerdp")
-        print("24. Run dnsenum")
-        print("25. Run kerbrute (userenum)")
+        print("13. Run smbmap")
+        print("14. Run smbmap (user & password)")
+        print("15. Run evilwinrm (password)")
+        print("16. Run evilwinrm (hash)")
+        print("17. Run crackmapexec smb (password)")
+        print("18. Run crackmapexec smb (hash)")
+        print("19. Run crackmapexec evilwinrm (password)")
+        print("20. Run crackmapexec evilwinrm (hash)")
+        print("21. Run rpcclient")
+        print("22. Run enum4linux")
+        print("23. Run snmpwalk")
+        print("24. Run snmpwalk extend")
+        print("25. Run xfreerdp")
+        print("26. Run dnsenum")
+        print("27. Run kerbrute (userenum)")
         print("99. Addhosts")
         print("0. Exit")
 
@@ -291,61 +299,66 @@ def main():
             password = input("Enter Password: ")
             share = input("Enter SMB Share: ")
             run_smbclient_user(url, user, password, share)
-        elif choice == '12':
+        elif choice == '13':
             url = input("Enter the URL: ")
             run_smbmap(url)
-        elif choice == '13':
+        elif choice == '14':
+            url = input("Enter the URL: ")
+            user = input("Enter User: ")
+            password = input("Enter Password: ")
+            run_smbmap_user(url, user, password)
+        elif choice == '15':
             url = input("Enter the URL: ")
             username = input("Enter username: ")
             password = input("Enter password: ")
             run_evilwinrm_password(url, username, password)
-        elif choice == '14':
+        elif choice == '16':
             url = input("Enter the URL: ")
             username = input("Enter username: ")
             hash = input("Enter hash: ")
             run_evilwinrm_hash(url, username, hash)
-        elif choice == '15':
-            url = input("Enter the URL: ")
-            username = input("Enter username/username.txt: ")
-            password = input("Enter password/password.txt: ")
-            run_crackmapexec_smb_password(url, username, password)
-        elif choice == '16':
-            url = input("Enter the URL: ")
-            username = input("Enter username/username.txt: ")
-            hash = input("Enter hash: ")
-            run_crackmapexec_smb_hash(url, username, hash)
         elif choice == '17':
             url = input("Enter the URL: ")
             username = input("Enter username/username.txt: ")
             password = input("Enter password/password.txt: ")
-            run_crackmapexec_evil_password(url, username, password)
+            run_crackmapexec_smb_password(url, username, password)
         elif choice == '18':
             url = input("Enter the URL: ")
             username = input("Enter username/username.txt: ")
             hash = input("Enter hash: ")
-            run_crackmapexec_evil_hash(url, username, hash)
+            run_crackmapexec_smb_hash(url, username, hash)
         elif choice == '19':
             url = input("Enter the URL: ")
-            run_rpcclient(url)
+            username = input("Enter username/username.txt: ")
+            password = input("Enter password/password.txt: ")
+            run_crackmapexec_evil_password(url, username, password)
         elif choice == '20':
             url = input("Enter the URL: ")
-            run_enum4linux(url)
+            username = input("Enter username/username.txt: ")
+            hash = input("Enter hash: ")
+            run_crackmapexec_evil_hash(url, username, hash)
         elif choice == '21':
             url = input("Enter the URL: ")
-            run_snmpwalk_all(url)
+            run_rpcclient(url)
         elif choice == '22':
             url = input("Enter the URL: ")
-            run_snmpwalk_extend(url)
+            run_enum4linux(url)
         elif choice == '23':
+            url = input("Enter the URL: ")
+            run_snmpwalk_all(url)
+        elif choice == '24':
+            url = input("Enter the URL: ")
+            run_snmpwalk_extend(url)
+        elif choice == '25':
             url = input("Enter the URL: ")
             username = input("Enter username: ")
             password = input("Enter password: ")
             run_xfreerdp(url, username, password)
-        elif choice == '24':
+        elif choice == '26':
             url = input("Enter the URL: ")
             domain = input("Enter domain: ")
             run_dnsenum(url, domain)
-        elif choice == '25':
+        elif choice == '27':
             url = input("Enter the IP: ")
             domain = input("Enter domain: ")
             user = input("Enter username/username.txt: ")
