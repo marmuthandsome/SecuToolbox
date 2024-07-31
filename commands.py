@@ -81,7 +81,7 @@ def run_dirsearch(url, wordlist):
 
 def run_feroxbuster(url, wordlist):
     try:
-        command = f"feroxbuster -u {url} -w {wordlist} -k -C 503"
+        command = f"feroxbuster -u {url} -w {wordlist} -k -x txt,bak,php,html,js,asp,aspx -C 503"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running feroxbuster: {e}{RESET}")
