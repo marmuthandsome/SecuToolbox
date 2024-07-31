@@ -79,6 +79,13 @@ def run_dirsearch(url, wordlist):
     except Exception as e:
         print(f"{RED}Error running dirsearch: {e}{RESET}")
 
+def run_feroxbuster(url, wordlist):
+    try:
+        command = f"feroxbuster -u {url} -w {wordlist} -k -C 503"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running feroxbuster: {e}{RESET}")
+
 def run_smbclient(url):
     try:
         command = f"smbclient -L \\\\{url} -N"
