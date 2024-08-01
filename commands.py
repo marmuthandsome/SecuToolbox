@@ -144,7 +144,7 @@ def run_crackmapexec_smb_password(url, username, password):
 
 def run_crackmapexec_smb_hash(url, username, hash):
     try:
-        command = f"sudo crackmapexec smb {url} -u {username} -H {hash} "
+        command = f"sudo crackmapexec smb {url} -u {username} -H {hash}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running crackmapexec: {e}{RESET}")
