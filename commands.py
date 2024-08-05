@@ -239,3 +239,10 @@ def run_GetADUsers(url, domain):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running GetADUsers: {e}{RESET}")
+
+def run_ldap(url, dc_1, dc_2):
+    try:
+        command = f"ldapsearch -x -H ldap://{url} -b 'DC={dc_1},DC={dc_2}'"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running GetADUsers: {e}{RESET}")
