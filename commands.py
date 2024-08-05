@@ -228,8 +228,7 @@ def run_psexec_password(url, user, password):
 
 def run_psexec_hash(url, user, hash):
     try:
-        command = f"impacket-psexec -hashes {hash} 
-{user}@{url}"
+        command = f"impacket-psexec -hashes {hash} {user}@{url}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running psexec: {e}{RESET}")
