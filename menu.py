@@ -1,5 +1,5 @@
 # menu.py
-from commands import run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_nmap_full, run_nmap_udp, run_rpcclient, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
+from commands import run_GetADUsers, run_GetNPUsers, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
 from constants import BOLD, GREEN, LCYAN, LPURPLE, RESET, RED
 import commands
 
@@ -47,6 +47,10 @@ def display_menu():
     print("35. Run xfreerdp")
     print("36. Run dnsenum")
     print("37. Run kerbrute (userenum)")
+    print("38. Run GetNPUsers")
+    print("39. Run Psexec (password)")
+    print("40. Run Psexec (hash)")
+    print("41. Run GetADUsers")
     print("99. Addhosts")
     print("0. Exit")
 
@@ -183,6 +187,24 @@ def handle_choice(choice):
         domain = input("Enter domain: ")
         user = input("Enter username/username.txt: ")
         run_kerbrute(url, domain, user)
+    elif choice == '38':
+        url = input("Enter the IP: ")
+        domain = input("Enter domain: ")
+        run_GetNPUsers(url, domain)
+    elif choice == '39':
+        url = input("Enter the IP: ")
+        user = input("Enter username: ")
+        password = input("Enter password: ")
+        run_psexec_password(url, user, password)
+    elif choice == '40':
+        url = input("Enter the IP: ")
+        user = input("Enter username: ")
+        hash = input("Enter hash: ")
+        run_psexec_hash(url, user, hash)
+    elif choice == '41':
+        url = input("Enter the IP: ")
+        domain = input("Enter domain: ")
+        run_GetADUsers(url, domain)
     elif choice == '99':
         ip = input("Enter the IP: ")
         host = input("Enter host: ")
