@@ -253,3 +253,10 @@ def run_secretsdump(url, domain, username, password):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running secretsdump: {e}{RESET}")
+
+def run_mssqlclient(url, domain, username, password, db):
+    try:
+        command = f"mssqlclient.py -db {db} {domain}/{username}:'{password}'@{url} -windows-auth"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running mssqlclient: {e}{RESET}")
