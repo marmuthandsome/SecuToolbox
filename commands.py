@@ -260,3 +260,10 @@ def run_mssqlclient(url, domain, username, password, db):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running mssqlclient: {e}{RESET}")
+
+def run_GetUserSPNs(url, domain, user):
+    try:
+        command = f"GetUserSPNs.py {domain}/{user} -dc-ip {url} -request"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running mssqlclient: {e}{RESET}")
