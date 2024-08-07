@@ -86,6 +86,8 @@ def run_feroxbuster(url, wordlist):
     except Exception as e:
         print(f"{RED}Error running feroxbuster: {e}{RESET}")
 
+# Active Directory        
+
 def run_smbclient(url):
     try:
         command = f"smbclient -L \\\\{url} -N"
