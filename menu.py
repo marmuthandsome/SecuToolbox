@@ -70,157 +70,226 @@ def handle_choice(choice):
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
         word = input("Enter word size to filter: ")
+        command = f"ffuf -u '{url}' -H 'Host: FUZZ.{url}' -w {wordlist} -c -t 100 -fw {word}"
+        print(f"Executing: {command}")
         run_ffuf_subdomain(url, wordlist, word)
     elif choice == '2':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
+        command = f"ffuf -u {url}/FUZZ -w {wordlist} -t 100"
+        print(f"Executing: {command}")
         run_ffuf(url, wordlist)
     elif choice == '3':
         target = input("Enter the target: ")
+        command = f"sudo nmap -sC -sV -O --open -p- {target} -Pn"
+        print(f"Executing: {command}")
         run_nmap_full(target)
     elif choice == '4':
         target = input("Enter the target: ")
+        command = f"sudo nmap -Pn -sU -sV -sC --top-ports=20 {target}"
+        print(f"Executing: {command}")
         run_nmap_udp(target)
     elif choice == '5':
         url = input("Enter the URL: ")
+        command = f"run_whatweb({url})"
+        print(f"Executing: {command}")
         run_whatweb(url)
     elif choice == '6':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
         word = input("Enter size word to filter: ")
+        command = f"run_wfuzz({url}, {wordlist}, {word})"
+        print(f"Executing: {command}")
         run_wfuzz(url, wordlist, word)
     elif choice == '7':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
+        command = f"run_gobuster_dir({url}, {wordlist})"
+        print(f"Executing: {command}")
         run_gobuster_dir(url, wordlist)
     elif choice == '8':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
         need = input("Need --wildcard: ")
+        command = f"run_gobuster_dns({url}, {wordlist}, {need})"
+        print(f"Executing: {command}")
         run_gobuster_dns(url, wordlist, need)
     elif choice == '9':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
+        command = f"run_gobuster_vhost({url}, {wordlist})"
+        print(f"Executing: {command}")
         run_gobuster_vhost(url, wordlist)
     elif choice == '10':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
+        command = f"run_dirsearch({url}, {wordlist})"
+        print(f"Executing: {command}")
         run_dirsearch(url, wordlist)
     elif choice == '11':
         url = input("Enter the URL: ")
         wordlist = input("Enter the path to the wordlist: ")
+        command = f"run_feroxbuster({url}, {wordlist})"
+        print(f"Executing: {command}")
         run_feroxbuster(url, wordlist)
-
 
 
     # Active Directory
 
     elif choice == '20':
         url = input("Enter the URL: ")
+        command = f"run_smbclient({url})"
+        print(f"Executing: {command}")
         run_smbclient(url)
     elif choice == '21':
         url = input("Enter the URL: ")
         user = input("Enter User: ")
         password = input("Enter Password: ")
+        command = f"run_smbclient_user({url}, {user}, {password})"
+        print(f"Executing: {command}")
         run_smbclient_user(url, user, password)
     elif choice == '22':
         url = input("Enter the URL: ")
         user = input("Enter User: ")
         share = input("Enter SMB Share: ")
+        command = f"run_smbclient_login({url}, {user}, {share})"
+        print(f"Executing: {command}")
         run_smbclient_login(url, user, share)
     elif choice == '23':
         url = input("Enter the URL: ")
+        command = f"run_smbmap({url})"
+        print(f"Executing: {command}")
         run_smbmap(url)
     elif choice == '24':
         url = input("Enter the URL: ")
         user = input("Enter User: ")
         password = input("Enter Password: ")
+        command = f"run_smbmap_user({url}, {user}, {password})"
+        print(f"Executing: {command}")
         run_smbmap_user(url, user, password)
     elif choice == '25':
         url = input("Enter the URL: ")
         username = input("Enter username: ")
         password = input("Enter password: ")
+        command = f"run_evilwinrm_password({url}, {username}, {password})"
+        print(f"Executing: {command}")
         run_evilwinrm_password(url, username, password)
     elif choice == '26':
         url = input("Enter the URL: ")
         username = input("Enter username: ")
         hash = input("Enter hash: ")
+        command = f"run_evilwinrm_hash({url}, {username}, {hash})"
+        print(f"Executing: {command}")
         run_evilwinrm_hash(url, username, hash)
     elif choice == '27':
         url = input("Enter the URL: ")
         username = input("Enter username/username.txt: ")
         password = input("Enter password/password.txt: ")
+        command = f"run_crackmapexec_smb_password({url}, {username}, {password})"
+        print(f"Executing: {command}")
         run_crackmapexec_smb_password(url, username, password)
     elif choice == '28':
         url = input("Enter the URL: ")
         username = input("Enter username/username.txt: ")
         hash = input("Enter hash: ")
+        command = f"run_crackmapexec_smb_hash({url}, {username}, {hash})"
+        print(f"Executing: {command}")
         run_crackmapexec_smb_hash(url, username, hash)
     elif choice == '29':
         url = input("Enter the URL: ")
         username = input("Enter username/username.txt: ")
         password = input("Enter password/password.txt: ")
+        command = f"run_crackmapexec_evil_password({url}, {username}, {password})"
+        print(f"Executing: {command}")
         run_crackmapexec_evil_password(url, username, password)
     elif choice == '30':
         url = input("Enter the URL: ")
         username = input("Enter username/username.txt: ")
         hash = input("Enter hash: ")
+        command = f"run_crackmapexec_evil_hash({url}, {username}, {hash})"
+        print(f"Executing: {command}")
         run_crackmapexec_evil_hash(url, username, hash)
     elif choice == '31':
         url = input("Enter the URL: ")
+        command = f"run_rpcclient({url})"
+        print(f"Executing: {command}")
         run_rpcclient(url)
     elif choice == '32':
         url = input("Enter the URL: ")
+        command = f"run_enum4linux({url})"
+        print(f"Executing: {command}")
         run_enum4linux(url)
     elif choice == '33':
         url = input("Enter the URL: ")
+        command = f"run_snmpwalk_all({url})"
+        print(f"Executing: {command}")
         run_snmpwalk_all(url)
     elif choice == '34':
         url = input("Enter the URL: ")
+        command = f"run_snmpwalk_extend({url})"
+        print(f"Executing: {command}")
         run_snmpwalk_extend(url)
     elif choice == '35':
         url = input("Enter the URL: ")
         username = input("Enter username: ")
         password = input("Enter password: ")
+        command = f"run_xfreerdp({url}, {username}, {password})"
+        print(f"Executing: {command}")
         run_xfreerdp(url, username, password)
     elif choice == '36':
         url = input("Enter the URL: ")
         domain = input("Enter domain: ")
+        command = f"run_dnsenum({url}, {domain})"
+        print(f"Executing: {command}")
         run_dnsenum(url, domain)
     elif choice == '37':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
         user = input("Enter username/username.txt: ")
+        command = f"run_kerbrute({url}, {domain}, {user})"
+        print(f"Executing: {command}")
         run_kerbrute(url, domain, user)
     elif choice == '38':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
+        command = f"run_GetNPUsers({url}, {domain})"
+        print(f"Executing: {command}")
         run_GetNPUsers(url, domain)
     elif choice == '39':
         url = input("Enter the IP: ")
         user = input("Enter username: ")
         password = input("Enter password: ")
+        command = f"run_psexec_password({url}, {user}, {password})"
+        print(f"Executing: {command}")
         run_psexec_password(url, user, password)
     elif choice == '40':
         url = input("Enter the IP: ")
         user = input("Enter username: ")
         hash = input("Enter hash: ")
+        command = f"run_psexec_hash({url}, {user}, {hash})"
+        print(f"Executing: {command}")
         run_psexec_hash(url, user, hash)
     elif choice == '41':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
         user = input("Enter user: ")
+        command = f"run_GetADUsers({url}, {domain}, {user})"
+        print(f"Executing: {command}")
         run_GetADUsers(url, domain, user)
     elif choice == '42':
         url = input("Enter the IP: ")
         dc_1 = input("Enter DC_1: ")
         dc_2 = input("Enter DC_2: ")
+        command = f"run_ldap({url}, {dc_1}, {dc_2})"
+        print(f"Executing: {command}")
         run_ldap(url, dc_1, dc_2)
     elif choice == '43':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
         username = input("Enter username: ")
         password = input("Enter password: ")
+        command = f"run_secretsdump({url}, {domain}, {username}, {password})"
+        print(f"Executing: {command}")
         run_secretsdump(url, domain, username, password)
     elif choice == '44':
         url = input("Enter the IP: ")
@@ -228,20 +297,28 @@ def handle_choice(choice):
         username = input("Enter username: ")
         password = input("Enter password: ")
         db = input("Enter database/volume: ")
+        command = f"run_mssqlclient({url}, {domain}, {username}, {password}, {db})"
+        print(f"Executing: {command}")
         run_mssqlclient(url, domain, username, password, db)
     elif choice == '45':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
         username = input("Enter username: ")
+        command = f"run_GetUserSPNs({url}, {domain}, {username})"
+        print(f"Executing: {command}")
         run_GetUserSPNs(url, domain, username)
     elif choice == '46':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
         username = input("Enter username.txt: ")
+        command = f"run_GetNPUsers_file({url}, {domain}, {username})"
+        print(f"Executing: {command}")
         run_GetNPUsers_file(url, domain, username)
     elif choice == '99':
         ip = input("Enter the IP: ")
         host = input("Enter host: ")
+        command = f"run_addhosts({host}, {ip})"
+        print(f"Executing: {command}")
         run_addhosts(host, ip)
     elif choice == '0':
         return False
