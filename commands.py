@@ -267,3 +267,10 @@ def run_GetUserSPNs(url, domain, user):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running mssqlclient: {e}{RESET}")
+
+def run_GetNPUsers_file(url, domain, username):
+    try:
+        command = f"GetNPUsers.py '{domain}/' -usersfile {username} -dc-ip {url}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running GetNPUsers: {e}{RESET}")

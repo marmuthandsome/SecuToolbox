@@ -1,5 +1,5 @@
 # menu.py
-from commands import run_GetADUsers, run_GetNPUsers, run_GetUserSPNs, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_mssqlclient, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_secretsdump, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
+from commands import run_GetADUsers, run_GetNPUsers, run_GetNPUsers_file, run_GetUserSPNs, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_mssqlclient, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_secretsdump, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
 from constants import BOLD, GREEN, LCYAN, LPURPLE, RESET, RED
 import commands
 
@@ -55,6 +55,7 @@ def display_menu():
     print("43. Run secretsdump (username & password)")
     print("44. Run mssqlclient (username, password & database)")
     print("45. Run getUserSPNs (username & password)")
+    print("46. Run GetNPUsers (BruteForce Username.txt)")
     print("99. Addhosts")
     print("0. Exit")
 
@@ -233,6 +234,11 @@ def handle_choice(choice):
         domain = input("Enter domain: ")
         username = input("Enter username: ")
         run_GetUserSPNs(url, domain, username)
+    elif choice == '46':
+        url = input("Enter the IP: ")
+        domain = input("Enter domain: ")
+        username = input("Enter username.txt: ")
+        run_GetNPUsers_file(url, domain, username)
     elif choice == '99':
         ip = input("Enter the IP: ")
         host = input("Enter host: ")
