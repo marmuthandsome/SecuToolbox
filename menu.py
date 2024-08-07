@@ -207,7 +207,8 @@ def handle_choice(choice):
     elif choice == '41':
         url = input("Enter the IP: ")
         domain = input("Enter domain: ")
-        run_GetADUsers(url, domain)
+        user = input("Enter user: ")
+        run_GetADUsers(url, domain, user)
     elif choice == '42':
         url = input("Enter the IP: ")
         dc_1 = input("Enter DC_1: ")

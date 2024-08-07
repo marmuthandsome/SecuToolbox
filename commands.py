@@ -233,9 +233,9 @@ def run_psexec_hash(url, user, hash):
     except Exception as e:
         print(f"{RED}Error running psexec: {e}{RESET}")
 
-def run_GetADUsers(url, domain):
+def run_GetADUsers(url, domain, user):
     try:
-        command = f"GetADUsers.py -all '{domain}/' -dc-ip {url}"
+        command = f"GetADUsers.py -all '{domain}/{user}' -dc-ip {url}"
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running GetADUsers: {e}{RESET}")
