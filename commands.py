@@ -1,6 +1,46 @@
 # commands.py
 import subprocess
-from constants import RESET, RED
+import shutil
+from constants import RESET, RED, GREEN, BOLD
+
+def check_tool_installed(tool_name):
+    """Check if a tool is installed on the system"""
+    return shutil.which(tool_name) is not None
+
+def check_all_tools():
+    """Check all required tools and print their installation status"""
+    tools = [
+        "nmap", "ffuf", "whatweb", "wfuzz", "gobuster", "dirsearch", "feroxbuster",
+        "smbclient", "smbmap", "evil-winrm", "crackmapexec", "rpcclient", "enum4linux",
+        "snmpwalk", "xfreerdp", "dnsenum", "kerbrute", "impacket-GetNPUsers",
+        "impacket-psexec", "GetADUsers.py", "ldapsearch", "secretsdump.py",
+        "mssqlclient.py", "GetUserSPNs.py", "rustscan", "enum4linux-ng",
+        "jwt_tool", "exiftool", "hash-identifier", "msfvenom"
+    ]
+    
+    print(f"\n{BOLD}{GREEN}Tool Installation Status:{RESET}")
+    print("=" * 50)
+    
+    installed = []
+    missing = []
+    
+    for tool in tools:
+        if check_tool_installed(tool):
+            print(f"{GREEN}✓{RESET} {tool} - Installed")
+            installed.append(tool)
+        else:
+            print(f"{RED}✗{RESET} {tool} - Not Installed")
+            missing.append(tool)
+    
+    print("=" * 50)
+    print(f"\nInstalled: {len(installed)}/{len(tools)}")
+    print(f"Missing: {len(missing)}/{len(tools)}")
+    
+    if missing:
+        print(f"\n{BOLD}Missing tools:{RESET} {', '.join(missing)}")
+        print(f"{BOLD}Run setup.sh to install missing tools{RESET}")
+    
+    return len(missing) == 0
 
 def run_addhosts(host, ip):
     try:
@@ -276,3 +316,46 @@ def run_GetNPUsers_file(url, domain, username):
         subprocess.run(command, shell=True)
     except Exception as e:
         print(f"{RED}Error running GetNPUsers: {e}{RESET}")
+
+def run_rustscan(target, ports):
+    try:
+        command = f"rustscan -a {target} -p {ports} -- -sC -sV"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running rustscan: {e}{RESET}")
+
+def run_enum4linux_ng(target):
+    try:
+        command = f"enum4linux-ng {target} -A"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running enum4linux-ng: {e}{RESET}")
+
+def run_jwt_tool(token):
+    try:
+        command = f"jwt_tool {token}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running jwt_tool: {e}{RESET}")
+
+def run_exiftool(file_path):
+    try:
+        command = f"exiftool {file_path}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running exiftool: {e}{RESET}")
+
+def run_hash_identifier(hash_value):
+    try:
+        command = f"hash-identifier"
+        process = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, text=True)
+        process.communicate(input=hash_value)
+    except Exception as e:
+        print(f"{RED}Error running hash-identifier: {e}{RESET}")
+
+def run_msfvenom(payload_type, lhost, lport, output_file, format_type):
+    try:
+        command = f"msfvenom -p {payload_type} LHOST={lhost} LPORT={lport} -f {format_type} -o {output_file}"
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{RED}Error running msfvenom: {e}{RESET}")
