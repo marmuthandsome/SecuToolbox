@@ -17,11 +17,18 @@ def print_menu():
 def display_menu():
 
     print(f"{BOLD}{GREEN}Wordlists:{RESET}")
-    print("1. /usr/share/wordlists/rockyou.txt.gz")
-    print("2. /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt")
-    print("3. /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt")
-    print("4. /usr/share/wordlists/dirbuster/directory-list-2.3-big.txt")
-    print("5. /usr/share/wordlists/amass/subdomains-top1mil-20000.txt")
+    print("1. /usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt")
+    print("2. /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt")
+    print("3. /usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt")
+    print("4. /usr/share/seclists/Discovery/Web-Content/raft-large-words.txt")
+    print("5. /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt")
+    print("6. /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt")
+    print("7. /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-big.txt")
+    print("8. /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt")
+    print("9. /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt")
+    print("10. /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt")
+    print("11. /usr/share/seclists/Discovery/Web-Content/common.txt")
+    print("12. /usr/share/seclists/Discovery/Web-Content/api/api-endpoints.txt")
 
     print(f"{BOLD}{GREEN}\nTools :{RESET}")
     print(f"{LCYAN}\nLinux & Windows{RESET}")
