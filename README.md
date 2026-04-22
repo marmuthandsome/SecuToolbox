@@ -1,4 +1,4 @@
-<img width="800" height="300" alt="SecuToolbox-logo" src="https://github.com/user-attachments/assets/a614d686-2c94-42cf-8f69-7a33244086fb" /><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+<img width="800" height="300" alt="SecuToolbox-logo" src="https://raw.githubusercontent.com/marmuthandsome/SecuToolbox/8c8f9ec0caf5a7beb7e2cdd6a1fdead20f3f7886/secutoolbox-logo.svg" /><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
 
 
 # SecuToolbox
